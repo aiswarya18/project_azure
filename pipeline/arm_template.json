@@ -1,0 +1,450 @@
+{
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "factoryName": {
+            "type": "string",
+            "metadata": "Data Factory name",
+            "defaultValue": "projectdatafactry12"
+        },
+        "AzureDataLakeStorage1_accountKey": {
+            "type": "secureString",
+            "metadata": "Secure string for 'accountKey' of 'AzureDataLakeStorage1'"
+        },
+        "AzureDataLakeStorage2_accountKey": {
+            "type": "secureString",
+            "metadata": "Secure string for 'accountKey' of 'AzureDataLakeStorage2'"
+        },
+        "AzureDataLakeStorage1_properties_typeProperties_url": {
+            "type": "string",
+            "defaultValue": "https://storageyelp.dfs.core.windows.net"
+        },
+        "AzureDataLakeStorage2_properties_typeProperties_url": {
+            "type": "string",
+            "defaultValue": "https://storageyelp.dfs.core.windows.net"
+        }
+    },
+    "variables": {
+        "factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+    },
+    "resources": [
+        {
+            "name": "[concat(parameters('factoryName'), '/AzureDataLakeStorage1')]",
+            "type": "Microsoft.DataFactory/factories/linkedServices",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "annotations": [],
+                "type": "AzureBlobFS",
+                "typeProperties": {
+                    "url": "[parameters('AzureDataLakeStorage1_properties_typeProperties_url')]",
+                    "accountKey": {
+                        "type": "SecureString",
+                        "value": "[parameters('AzureDataLakeStorage1_accountKey')]"
+                    }
+                }
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/Json1')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "AzureDataLakeStorage1",
+                    "type": "LinkedServiceReference"
+                },
+                "annotations": [],
+                "type": "Json",
+                "typeProperties": {
+                    "location": {
+                        "type": "AzureBlobFSLocation",
+                        "fileName": "business_sample_cleveland.json",
+                        "fileSystem": "reducedyelp"
+                    }
+                },
+                "schema": {
+                    "type": "object",
+                    "properties": {
+                        "address": {
+                            "type": "string"
+                        },
+                        "attributes": {
+                            "type": "object",
+                            "properties": {
+                                "BusinessAcceptsCreditCards": {
+                                    "type": "boolean"
+                                },
+                                "BusinessParking": {
+                                    "type": "object",
+                                    "properties": {
+                                        "garage": {
+                                            "type": "boolean"
+                                        },
+                                        "street": {
+                                            "type": "boolean"
+                                        },
+                                        "validated": {
+                                            "type": "boolean"
+                                        },
+                                        "lot": {
+                                            "type": "boolean"
+                                        },
+                                        "valet": {
+                                            "type": "boolean"
+                                        }
+                                    }
+                                },
+                                "Caters": {
+                                    "type": "boolean"
+                                },
+                                "WiFi": {
+                                    "type": "string"
+                                },
+                                "OutdoorSeating": {
+                                    "type": "boolean"
+                                },
+                                "RestaurantsPriceRange2": {
+                                    "type": "integer"
+                                },
+                                "BikeParking": {
+                                    "type": "boolean"
+                                },
+                                "RestaurantsDelivery": {
+                                    "type": "boolean"
+                                },
+                                "RestaurantsTakeOut": {
+                                    "type": "boolean"
+                                },
+                                "WheelchairAccessible": {
+                                    "type": "boolean"
+                                },
+                                "GoodForMeal": {
+                                    "type": "object",
+                                    "properties": {
+                                        "dessert": {
+                                            "type": "boolean"
+                                        },
+                                        "latenight": {
+                                            "type": "boolean"
+                                        },
+                                        "lunch": {
+                                            "type": "boolean"
+                                        },
+                                        "dinner": {
+                                            "type": "boolean"
+                                        },
+                                        "brunch": {
+                                            "type": "boolean"
+                                        },
+                                        "breakfast": {
+                                            "type": "boolean"
+                                        }
+                                    }
+                                },
+                                "Alcohol": {
+                                    "type": "string"
+                                },
+                                "HasTV": {
+                                    "type": "boolean"
+                                },
+                                "GoodForKids": {
+                                    "type": "boolean"
+                                },
+                                "NoiseLevel": {
+                                    "type": "string"
+                                },
+                                "RestaurantsAttire": {
+                                    "type": "string"
+                                },
+                                "RestaurantsReservations": {
+                                    "type": "boolean"
+                                },
+                                "RestaurantsTableService": {
+                                    "type": "boolean"
+                                },
+                                "Ambience": {
+                                    "type": "object",
+                                    "properties": {
+                                        "romantic": {
+                                            "type": "boolean"
+                                        },
+                                        "intimate": {
+                                            "type": "boolean"
+                                        },
+                                        "classy": {
+                                            "type": "boolean"
+                                        },
+                                        "hipster": {
+                                            "type": "boolean"
+                                        },
+                                        "divey": {
+                                            "type": "boolean"
+                                        },
+                                        "touristy": {
+                                            "type": "boolean"
+                                        },
+                                        "trendy": {
+                                            "type": "boolean"
+                                        },
+                                        "upscale": {
+                                            "type": "boolean"
+                                        },
+                                        "casual": {
+                                            "type": "boolean"
+                                        }
+                                    }
+                                },
+                                "RestaurantsGoodForGroups": {
+                                    "type": "boolean"
+                                },
+                                "GoodForDancing": {
+                                    "type": "boolean"
+                                },
+                                "Music": {
+                                    "type": "object",
+                                    "properties": {
+                                        "dj": {
+                                            "type": "boolean"
+                                        },
+                                        "background_music": {
+                                            "type": "boolean"
+                                        },
+                                        "no_music": {
+                                            "type": "boolean"
+                                        },
+                                        "jukebox": {
+                                            "type": "boolean"
+                                        },
+                                        "live": {
+                                            "type": "boolean"
+                                        },
+                                        "video": {
+                                            "type": "boolean"
+                                        },
+                                        "karaoke": {
+                                            "type": "boolean"
+                                        }
+                                    }
+                                },
+                                "BusinessAcceptsBitcoin": {
+                                    "type": "boolean"
+                                },
+                                "HappyHour": {
+                                    "type": "boolean"
+                                },
+                                "DogsAllowed": {
+                                    "type": "boolean"
+                                },
+                                "BestNights": {
+                                    "type": "object",
+                                    "properties": {
+                                        "monday": {
+                                            "type": "boolean"
+                                        },
+                                        "tuesday": {
+                                            "type": "boolean"
+                                        },
+                                        "friday": {
+                                            "type": "boolean"
+                                        },
+                                        "wednesday": {
+                                            "type": "boolean"
+                                        },
+                                        "thursday": {
+                                            "type": "boolean"
+                                        },
+                                        "sunday": {
+                                            "type": "boolean"
+                                        },
+                                        "saturday": {
+                                            "type": "boolean"
+                                        }
+                                    }
+                                },
+                                "CoatCheck": {
+                                    "type": "boolean"
+                                },
+                                "Smoking": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "business_id": {
+                            "type": "string"
+                        },
+                        "categories": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "city": {
+                            "type": "string"
+                        },
+                        "hours": {
+                            "type": "object",
+                            "properties": {
+                                "Monday": {
+                                    "type": "string"
+                                },
+                                "Tuesday": {
+                                    "type": "string"
+                                },
+                                "Friday": {
+                                    "type": "string"
+                                },
+                                "Wednesday": {
+                                    "type": "string"
+                                },
+                                "Thursday": {
+                                    "type": "string"
+                                },
+                                "Sunday": {
+                                    "type": "string"
+                                },
+                                "Saturday": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "is_open": {
+                            "type": "integer"
+                        },
+                        "latitude": {
+                            "type": "number"
+                        },
+                        "longitude": {
+                            "type": "number"
+                        },
+                        "name": {
+                            "type": "string"
+                        },
+                        "neighborhood": {
+                            "type": "string"
+                        },
+                        "postal_code": {
+                            "type": "string"
+                        },
+                        "review_count": {
+                            "type": "integer"
+                        },
+                        "stars": {
+                            "type": "number"
+                        },
+                        "state": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "dependsOn": [
+                "[concat(variables('factoryId'), '/linkedServices/AzureDataLakeStorage1')]"
+            ]
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/pipeline1')]",
+            "type": "Microsoft.DataFactory/factories/pipelines",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "activities": [
+                    {
+                        "name": "Copy data1",
+                        "type": "Copy",
+                        "dependsOn": [],
+                        "policy": {
+                            "timeout": "7.00:00:00",
+                            "retry": 0,
+                            "retryIntervalInSeconds": 30,
+                            "secureOutput": false,
+                            "secureInput": false
+                        },
+                        "userProperties": [],
+                        "typeProperties": {
+                            "source": {
+                                "type": "JsonSource",
+                                "storeSettings": {
+                                    "type": "AzureBlobFSReadSettings",
+                                    "recursive": true,
+                                    "enablePartitionDiscovery": false
+                                },
+                                "formatSettings": {
+                                    "type": "JsonReadSettings"
+                                }
+                            },
+                            "sink": {
+                                "type": "JsonSink",
+                                "storeSettings": {
+                                    "type": "AzureBlobFSWriteSettings"
+                                },
+                                "formatSettings": {
+                                    "type": "JsonWriteSettings"
+                                }
+                            },
+                            "enableStaging": false
+                        },
+                        "inputs": [
+                            {
+                                "referenceName": "Json1",
+                                "type": "DatasetReference",
+                                "parameters": {}
+                            }
+                        ],
+                        "outputs": [
+                            {
+                                "referenceName": "Json2",
+                                "type": "DatasetReference",
+                                "parameters": {}
+                            }
+                        ]
+                    }
+                ],
+                "annotations": []
+            },
+            "dependsOn": [
+                "[concat(variables('factoryId'), '/datasets/Json1')]",
+                "[concat(variables('factoryId'), '/datasets/Json2')]"
+            ]
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/AzureDataLakeStorage2')]",
+            "type": "Microsoft.DataFactory/factories/linkedServices",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "annotations": [],
+                "type": "AzureBlobFS",
+                "typeProperties": {
+                    "url": "[parameters('AzureDataLakeStorage2_properties_typeProperties_url')]",
+                    "accountKey": {
+                        "type": "SecureString",
+                        "value": "[parameters('AzureDataLakeStorage2_accountKey')]"
+                    }
+                }
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/Json2')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "AzureDataLakeStorage2",
+                    "type": "LinkedServiceReference"
+                },
+                "annotations": [],
+                "type": "Json",
+                "typeProperties": {
+                    "location": {
+                        "type": "AzureBlobFSLocation",
+                        "fileSystem": "yelpcontainer"
+                    }
+                },
+                "schema": {}
+            },
+            "dependsOn": [
+                "[concat(variables('factoryId'), '/linkedServices/AzureDataLakeStorage2')]"
+            ]
+        }
+    ]
+}
