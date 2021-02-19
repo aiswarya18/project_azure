@@ -1,0 +1,301 @@
+{
+	"name": "Json1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureDataLakeStorage1",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"inputsource": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": {
+					"value": "@dataset().inputsource",
+					"type": "Expression"
+				},
+				"fileSystem": "reducedyelp"
+			}
+		},
+		"schema": {
+			"type": "object",
+			"properties": {
+				"address": {
+					"type": "string"
+				},
+				"attributes": {
+					"type": "object",
+					"properties": {
+						"BusinessAcceptsCreditCards": {
+							"type": "boolean"
+						},
+						"BusinessParking": {
+							"type": "object",
+							"properties": {
+								"garage": {
+									"type": "boolean"
+								},
+								"street": {
+									"type": "boolean"
+								},
+								"validated": {
+									"type": "boolean"
+								},
+								"lot": {
+									"type": "boolean"
+								},
+								"valet": {
+									"type": "boolean"
+								}
+							}
+						},
+						"Caters": {
+							"type": "boolean"
+						},
+						"WiFi": {
+							"type": "string"
+						},
+						"OutdoorSeating": {
+							"type": "boolean"
+						},
+						"RestaurantsPriceRange2": {
+							"type": "integer"
+						},
+						"BikeParking": {
+							"type": "boolean"
+						},
+						"RestaurantsDelivery": {
+							"type": "boolean"
+						},
+						"RestaurantsTakeOut": {
+							"type": "boolean"
+						},
+						"WheelchairAccessible": {
+							"type": "boolean"
+						},
+						"GoodForMeal": {
+							"type": "object",
+							"properties": {
+								"dessert": {
+									"type": "boolean"
+								},
+								"latenight": {
+									"type": "boolean"
+								},
+								"lunch": {
+									"type": "boolean"
+								},
+								"dinner": {
+									"type": "boolean"
+								},
+								"brunch": {
+									"type": "boolean"
+								},
+								"breakfast": {
+									"type": "boolean"
+								}
+							}
+						},
+						"Alcohol": {
+							"type": "string"
+						},
+						"HasTV": {
+							"type": "boolean"
+						},
+						"GoodForKids": {
+							"type": "boolean"
+						},
+						"NoiseLevel": {
+							"type": "string"
+						},
+						"RestaurantsAttire": {
+							"type": "string"
+						},
+						"RestaurantsReservations": {
+							"type": "boolean"
+						},
+						"RestaurantsTableService": {
+							"type": "boolean"
+						},
+						"Ambience": {
+							"type": "object",
+							"properties": {
+								"romantic": {
+									"type": "boolean"
+								},
+								"intimate": {
+									"type": "boolean"
+								},
+								"classy": {
+									"type": "boolean"
+								},
+								"hipster": {
+									"type": "boolean"
+								},
+								"divey": {
+									"type": "boolean"
+								},
+								"touristy": {
+									"type": "boolean"
+								},
+								"trendy": {
+									"type": "boolean"
+								},
+								"upscale": {
+									"type": "boolean"
+								},
+								"casual": {
+									"type": "boolean"
+								}
+							}
+						},
+						"RestaurantsGoodForGroups": {
+							"type": "boolean"
+						},
+						"GoodForDancing": {
+							"type": "boolean"
+						},
+						"Music": {
+							"type": "object",
+							"properties": {
+								"dj": {
+									"type": "boolean"
+								},
+								"background_music": {
+									"type": "boolean"
+								},
+								"no_music": {
+									"type": "boolean"
+								},
+								"jukebox": {
+									"type": "boolean"
+								},
+								"live": {
+									"type": "boolean"
+								},
+								"video": {
+									"type": "boolean"
+								},
+								"karaoke": {
+									"type": "boolean"
+								}
+							}
+						},
+						"BusinessAcceptsBitcoin": {
+							"type": "boolean"
+						},
+						"HappyHour": {
+							"type": "boolean"
+						},
+						"DogsAllowed": {
+							"type": "boolean"
+						},
+						"BestNights": {
+							"type": "object",
+							"properties": {
+								"monday": {
+									"type": "boolean"
+								},
+								"tuesday": {
+									"type": "boolean"
+								},
+								"friday": {
+									"type": "boolean"
+								},
+								"wednesday": {
+									"type": "boolean"
+								},
+								"thursday": {
+									"type": "boolean"
+								},
+								"sunday": {
+									"type": "boolean"
+								},
+								"saturday": {
+									"type": "boolean"
+								}
+							}
+						},
+						"CoatCheck": {
+							"type": "boolean"
+						},
+						"Smoking": {
+							"type": "string"
+						}
+					}
+				},
+				"business_id": {
+					"type": "string"
+				},
+				"categories": {
+					"type": "array",
+					"items": {
+						"type": "string"
+					}
+				},
+				"city": {
+					"type": "string"
+				},
+				"hours": {
+					"type": "object",
+					"properties": {
+						"Monday": {
+							"type": "string"
+						},
+						"Tuesday": {
+							"type": "string"
+						},
+						"Friday": {
+							"type": "string"
+						},
+						"Wednesday": {
+							"type": "string"
+						},
+						"Thursday": {
+							"type": "string"
+						},
+						"Sunday": {
+							"type": "string"
+						},
+						"Saturday": {
+							"type": "string"
+						}
+					}
+				},
+				"is_open": {
+					"type": "integer"
+				},
+				"latitude": {
+					"type": "number"
+				},
+				"longitude": {
+					"type": "number"
+				},
+				"name": {
+					"type": "string"
+				},
+				"neighborhood": {
+					"type": "string"
+				},
+				"postal_code": {
+					"type": "string"
+				},
+				"review_count": {
+					"type": "integer"
+				},
+				"stars": {
+					"type": "number"
+				},
+				"state": {
+					"type": "string"
+				}
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
